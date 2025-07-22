@@ -92,7 +92,7 @@ app.delete('/users/:id', async (req, res) => {
 
 // Root route
 app.get('/', (req, res) => {
-  res.send('🚀 Node.js + RDS + SecretsManager CRUD API is running!');
+  res.send('🚀 Node.js + RDS + Github + SecretsManager CRUD API is running!');
 });
 
 // Start server
