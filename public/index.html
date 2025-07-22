@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Users App</title>
+</head>
+<body>
+  <h1>All Users</h1>
+  <ul id="users-list"></ul>
+
+  <h2>Add User</h2>
+  <input id="name" placeholder="Name">
+  <input id="email" placeholder="Email">
+  <button onclick="addUser()">Add</button>
+
+  <script>
+    async function fetchUsers() {
+      const res = await fetch('/users');
+      const users = await res.json();
+      const list = document.getElementById('users-list');
+      list.innerHTML = '';
+      users.forEach(u => {
+        list.innerHTML += `<li>${u.name} (${u.email})</li>`;
+      });
+    }
+
+    async function addUser() {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+
+      await fetch('/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email })
+      });
+
+      fetchUsers();
+    }
+
+    fetchUsers(); // load users on page load
+  </script>
+</body>
+</html>
